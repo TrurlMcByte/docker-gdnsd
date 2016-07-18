@@ -1,0 +1,2 @@
+# docker-gdnsd
+Dockerized gdnsd
