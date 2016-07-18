@@ -51,6 +51,6 @@ RUN \
     && rm -rf /usr/src/*
 
 ADD entrypoint.sh /entrypoint.sh
-EXPOSE 53 53/udp
+EXPOSE 53 53/udp 3506
 ENTRYPOINT ["/entrypoint.sh"]
 #CMD ["/usr/local/sbin/gdnsd", "-fx", "start"]

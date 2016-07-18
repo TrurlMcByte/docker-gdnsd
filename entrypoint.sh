@@ -6,6 +6,8 @@ test -f "${CHECKFILE}" && find "${CHECKFILE}" -mtime 7 -delete
 
 if test ! -f "${CHECKFILE}"
 then
+    mkdir -p /usr/local/var/lib/gdnsd
+    chown -R gdnsd /usr/local/var/lib/gdnsd
 #    mkdir -p /usr/share/GeoIP
 #    curl -s http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz | gunzip -c > /usr/share/GeoIP/GeoIP.dat
 #    curl -s http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz | gunzip -c > /usr/share/GeoIP/GeoIP.dat
