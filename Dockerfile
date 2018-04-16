@@ -1,6 +1,6 @@
-FROM alpine:3.3
+FROM alpine:latest
 
-ENV VERSION=2.2.4
+ENV VERSION=2.4.0
 
 RUN \
     addgroup -S gdnsd \
