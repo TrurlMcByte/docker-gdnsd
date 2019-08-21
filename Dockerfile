@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV VERSION=2.4.0
+ENV VERSION=3.2.1
 
 RUN \
     addgroup -S gdnsd \
@@ -20,6 +20,7 @@ RUN \
         libc-dev \
         libev-dev \
         libmaxminddb-dev \
+        libsodium-dev \
         libtool \
         make \
         openssl-dev \
@@ -34,11 +35,11 @@ RUN \
     && cd /usr/src \
     && curl -sSL https://github.com/gdnsd/gdnsd/releases/download/v${VERSION}/gdnsd-${VERSION}.tar.xz | tar -xJ \
     && cd gdnsd-$VERSION \
+#    && sed -i 's/1546300799LLU/1830775403LLU/' libgdmaps/gdgeoip2.c \
     && autoreconf -vif \
     && ./configure \
     && make all install \
     && strip /usr/local/sbin/gdnsd \
-    && strip /usr/local/lib/gdnsd/*.so \
     && runDeps="$( \
         scanelf --needed --nobanner --recursive /usr/local \
             | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
@@ -51,6 +52,7 @@ RUN \
     && rm -rf /usr/src/*
 
 ADD entrypoint.sh /entrypoint.sh
+ADD maxminddb.conf /etc/conf.d/libmaxminddb
 EXPOSE 53 53/udp 3506
 ENTRYPOINT ["/entrypoint.sh"]
 #CMD ["/usr/local/sbin/gdnsd", "-fx", "start"]

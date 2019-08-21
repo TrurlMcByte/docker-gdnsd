@@ -16,7 +16,7 @@ fi
 
 
 if [ $# -eq 0 ]; then
-    /usr/local/sbin/gdnsd -fx start
+    /usr/local/sbin/gdnsd start
 fi
 
 exec "$@"
